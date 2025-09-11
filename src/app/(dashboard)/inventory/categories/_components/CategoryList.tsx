@@ -1,6 +1,5 @@
 'use client';
 
-import { categories } from '@/utils/data-placeholder';
 import { Category } from '@/utils/definition';
 import {
 	ColumnDef,
@@ -8,20 +7,28 @@ import {
 	getCoreRowModel,
 	useReactTable,
 } from '@tanstack/react-table';
-import React, { useMemo, useState } from 'react';
-import { ColorBadge } from './_components/table/cells';
+import React, { useMemo, useState, useEffect, useCallback } from 'react';
+
 import { DynamicLucideIcon } from '@/components/ui/DynamicLucideIcon';
-import RowActions from './_components/table/rowActions';
+import RowActions from './table/rowActions';
+import { ColorBadge } from './table/cells';
 import { Button } from '@/components/ui/Button';
 import { useRouter } from 'next/navigation';
 
-const CategoriesPage = () => {
-	const router = useRouter();
-	const [data, setData] = useState<Category[]>(categories);
+type CategoryListProps = {
+	data: Category[];
+};
 
-	const onDelete = (id: string | number) => {
-		setData(data.filter((d) => d.id !== id));
-	};
+const CategoryList: React.FC<CategoryListProps> = ({ data }) => {
+	const router = useRouter();
+
+	const [categories, setCategories] = useState<Category[]>(data);
+
+	useEffect(() => setCategories(data), [data]);
+
+	const onDelete = useCallback((id: string | number) => {
+		// delete record
+	}, [])
 
 	const columns: ColumnDef<Category>[] = useMemo(
 		() => [
@@ -55,21 +62,25 @@ const CategoriesPage = () => {
 				),
 			},
 		],
-		[]
+		[onDelete]
 	);
 
 	const table = useReactTable({
-		data,
+		categories,
 		columns,
 		getCoreRowModel: getCoreRowModel(),
 	});
 
 	return (
 		<div className='w-full'>
-			<div className="flex justify-end my-5">
-				<Button className='w-40' onClick={() => router.push('/inventory/categories/add')}>Add Category</Button>
+			<div className='flex justify-end my-5'>
+				<Button
+					className='w-40'
+					onClick={() => router.push('/inventory/categories/add')}
+				>
+					Add Category
+				</Button>
 			</div>
-
 			<div className='rounded-sm border border-neutral-800'>
 				<table className='w-full text-sm'>
 					<thead className=''>
@@ -114,4 +125,4 @@ const CategoriesPage = () => {
 	);
 };
 
-export default CategoriesPage;
+export default CategoryList;

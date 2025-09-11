@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import React from 'react';
 import NavItem from './NavItem';
 import { LinkNav, SideNavLinks } from './SideNavLinks';
+import { signOut } from '@/actions/signOut';
 
 const SideNav = () => {
 	const path = usePathname();
@@ -18,8 +19,11 @@ const SideNav = () => {
 				</ul>
 
 				<div className='py-5'>
-					<form>
-						<button className='bg-primary/80 w-full py-2 rounded-sm hover:bg-primary cursor-pointer'>
+					<form action={signOut}>
+						<button
+							type="submit"
+							className='bg-primary/80 w-full py-2 rounded-sm hover:bg-primary cursor-pointer'
+						>
 							Sign Out
 						</button>
 					</form>

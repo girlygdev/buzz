@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { ColorBadge } from '@/app/inventory/categories/_components/table/cells';
+import { ColorBadge } from '@/app/(dashboard)/inventory/categories/_components/table/cells';
 import {
 	Listbox,
 	ListboxButton,

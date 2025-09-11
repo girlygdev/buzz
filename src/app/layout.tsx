@@ -4,12 +4,11 @@ import '@/styles/globals.css';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 
 import { geistMono, geistSans } from '@/styles/fonts';
-import UserLayout from '@/components/layout.tsx/UserLayout';
 
 export const metadata: Metadata = {
 	title: 'Verve POS',
 	description: 'Verve Cafe POS',
-	icons: ['/logo.png']
+	icons: ['/logo.png'],
 };
 
 export default function RootLayout({
@@ -22,9 +21,7 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
-				<UserLayout>
-					{children}
-				</UserLayout>
+				{children}
 			</body>
 		</html>
 	);

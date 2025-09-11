@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
-import { categories, items } from '../../utils/data-placeholder';
-import { Category, Item } from '../../utils/definition';
+import { categories, items } from '@/utils/data-placeholder';
+import { Category, Item } from '@/utils/definition';
 import OrderCategory from './_components/MenuCategory';
 import OrderItemComponent from './_components/MenuItem';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -32,7 +32,7 @@ const OrderPage = () => {
 					className={clsx('h-60', categories.length > 8 && 'lg:h-90')}
 				>
 					<PerfectScrollbar options={{ suppressScrollX: true }}>
-						<div className='grid grid-cols-2 md:grid-cols-4 gap-2'>
+						<div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2'>
 							{categories.map((category: Category) => (
 								<OrderCategory
 									key={category.id}
@@ -66,7 +66,7 @@ const OrderPage = () => {
 								</p>
 							</div>
 						) : (
-							<div className='grid grid-cols-2 md:grid-cols-4 gap-2'>
+							<div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2'>
 								{orderItems.map((item: Item, key) => (
 									<OrderItemComponent
 										key={key}
